@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import ClientList from "./componnets/ClientList";
+import Home from "./componnets/Home";
+import AddClientData from "./componnets/AddClientData";
+import EditClientData from "./componnets/EditClientData";
+import { GlobalProvider } from "./context/GlobalState";
+import Header from "./componnets/Header";
+import Footer from "./componnets/Footer";
+import Calculator from './componnets/Calculator'
+import About from './componnets/About';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <div className="App">
+        <Header />
+        <main>
+          <Switch>
+            <Route path="/" component={Home} exact></Route>
+            <Route path="/edit/:id" component={EditClientData} exact></Route>
+            <Route path="/calculator" component={Calculator} exact></Route>
+            <Route path="/about" exact>{About}</Route>
+          </Switch>
+        </main>
+        <Footer />
+      </div>
+    </GlobalProvider>
   );
-}
+};
 
 export default App;
