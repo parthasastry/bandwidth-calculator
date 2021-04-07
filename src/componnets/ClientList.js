@@ -1,18 +1,22 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext, deleteAllClients } from "../context/GlobalState";
-import { Container, Button, Alert, Table } from "react-bootstrap";
+import { Row, Col, Button, Alert, Table } from "react-bootstrap";
 
 const ClientList = () => {
-  const { clientsData, deleteClient, deleteAllClients } = useContext(GlobalContext);
+  const { clientsData, deleteClient, deleteAllClients } = useContext(
+    GlobalContext
+  );
 
   const tableHeader = (
     <thead>
       <tr>
         <th>Client</th>
-        <th>Size in MB</th>
+        <th>Size(MB)</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>Days</th>
+        <th>MBPS(BITS)</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -20,12 +24,17 @@ const ClientList = () => {
   );
 
   const tableData = clientsData.map((client) => {
+    let days =
+      (new Date(client.endDate) - new Date(client.startDate)) / 86400000 + 1;
+    let mbps = (((client.sizeInMB * 8) / (24 * 60 * 60)) * days).toFixed(0);
     return (
       <tr key={client.client}>
         <td>{client.client}</td>
-        <td>{client.sizeInMB}</td>
+        <td>{new Intl.NumberFormat().format(client.sizeInMB)}</td>
         <td>{client.startDate}</td>
         <td>{client.endDate}</td>
+        <td>{days}</td>
+        <td>{mbps}</td>
         <td>
           <Link to={`/edit/${client.client}`}>
             <Button>
@@ -54,26 +63,37 @@ const ClientList = () => {
   );
 
   return (
-    <Container className="m-3">
+    <div className="m-3">
       <React.Fragment>
         {clientsData.length > 0 ? (
           <React.Fragment>
             <h1>Clients Data</h1>
-            <Button variant="danger"
-              onClick={deleteAllClients}
-            >Reset</Button>
+            <Row>
+              <Col>
+                <Button variant="danger" onClick={deleteAllClients}>
+                  Reset
+                </Button>
+              </Col>
+              <Col>
+                <Link to={`/calculator`}>
+                  <Button variant="info">
+                    <i class="fas fa-calculator 4x"></i> Calculate Bandwidth
+                  </Button>
+                </Link>
+              </Col>
+            </Row>
+            <br />
+            <Row>
             {T}
+            </Row>
+
+
           </React.Fragment>
         ) : (
           <Alert variant="dark">Please enter client data</Alert>
         )}
-        <Link to={`/calculator`}>
-          <Button>
-            <i class="fas fa-calculator 4x"></i> Calculate
-          </Button>
-        </Link>
       </React.Fragment>
-    </Container>
+    </div>
   );
 };
 

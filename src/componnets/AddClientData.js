@@ -55,7 +55,7 @@ const AddClientData = () => {
 
   return (
     <Container className="m-3">
-      <h1>Add new client data</h1>
+      <h1 className="text-center">Add new client data</h1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row>
           <Col>

@@ -76,7 +76,7 @@ const Calculator = () => {
   return (
     <Container>
       <h1>Calculator</h1>
-      <Link to="/" className="btn btn-dark my-3">
+      <Link to="/bandwidth" className="btn btn-dark my-3">
         Go back
       </Link>
       <Row>

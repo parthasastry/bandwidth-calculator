@@ -12,10 +12,10 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <LinkContainer to="/" className="text-white">
-            <Nav.Link>Home</Nav.Link>
+            <Nav.Link>Duration</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/calculator" className="text-white">
-            <Nav.Link>Calculator</Nav.Link>
+          <LinkContainer to="/bandwidth" className="text-white">
+            <Nav.Link>Bandwidth</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/about" className="text-white">
             <Nav.Link>About</Nav.Link>

@@ -4,6 +4,7 @@ import ClientList from "./componnets/ClientList";
 import Home from "./componnets/Home";
 import AddClientData from "./componnets/AddClientData";
 import EditClientData from "./componnets/EditClientData";
+import Duration from './componnets/Duration'
 import { GlobalProvider } from "./context/GlobalState";
 import Header from "./componnets/Header";
 import Footer from "./componnets/Footer";
@@ -17,7 +18,8 @@ const App = () => {
         <Header />
         <main>
           <Switch>
-            <Route path="/" component={Home} exact></Route>
+            <Route path="/" component={Duration} exact></Route>
+            <Route path="/bandwidth" component={Home} exact></Route>
             <Route path="/edit/:id" component={EditClientData} exact></Route>
             <Route path="/calculator" component={Calculator} exact></Route>
             <Route path="/about" exact>{About}</Route>
